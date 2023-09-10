@@ -26,14 +26,23 @@ function selectCategory() {
     getProducts(0, `https://dummyjson.com/products/category/${text}`);
   }
 }
-function getProducts(skipNumber = 0, apiUrl) {
+function sortByPrice() {
+  let e = document.getElementById("sortProducts");
+  var text = e.options[e.selectedIndex].text;
+  if (text) {
+    let container = document.querySelector(".grid-container");
+    container.innerHTML = "";
+    getProducts(0, "", text, 100);
+  }
+}
+function getProducts(skipNumber = 0, apiUrl, sortType, limit = 12) {
   skipNumber = skipNumber * increment;
   increment += 1;
   let url;
   if (apiUrl) {
     url = apiUrl;
   } else {
-    url = "https://dummyjson.com/products?limit=12";
+    url = `https://dummyjson.com/products?limit=${limit}`;
     url += `&skip=${skipNumber}`;
   }
   let viewMore = document.querySelector(".view-more");
@@ -43,14 +52,24 @@ function getProducts(skipNumber = 0, apiUrl) {
   }
   fetch(url)
     .then((res) => res.json())
-    .then((products) => {
-      total = products.total;
-      products.products.forEach((product) => {
+    .then((response) => {
+      console.log(sortType, "sortTypesortType");
+      if (sortType == "Ascending") {
+        response.products.sort((a, b) => {
+          return a.price - b.price;
+        });
+      } else if (sortType == "Descending") {
+        response.products.sort((a, b) => {
+          return b.price - a.price;
+        });
+      }
+      total = response.total;
+      response.products.forEach((product) => {
         createCart(product);
       });
       toggleViewMoreBtn(false);
       toggleLoader(true);
-      if (skipNumber == total - 4 || total <= 12) {
+      if (skipNumber == total - 4 || total <= 12 || sortType) {
         toggleViewMoreBtn(true);
       }
     })

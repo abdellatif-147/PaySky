@@ -9,17 +9,24 @@
     <script></script>
   </head>
   <body>
-    <div class="category-container">
-      <label class="category-label" for="categories"
-        >Choose your Category:</label
-      >
+    <div class="header">
       <select
         name="categories"
         id="categories"
         class="category-select"
         onchange="selectCategory(event)"
       >
-        <option value="none" selected>Select an Option</option>
+        <option value="none" selected>Choose your Category</option>
+      </select>
+      <select
+        name="sortProducts"
+        id="sortProducts"
+        class="sort-select"
+        onchange="sortByPrice(event)"
+      >
+        <option value="none" selected>sort by price</option>
+        <option value="Ascending" >Ascending</option>
+        <option value="Descending" >Descending</option>
       </select>
     </div>
     <div class="grid-container"></div>
