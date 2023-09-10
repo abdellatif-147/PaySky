@@ -1,8 +1,9 @@
 let increment = 0;
 let total = 0;
-loadCategories();
-loadCarts();
-function loadCategories() {
+getCategories();
+getProducts();
+
+function getCategories() {
   fetch("https://dummyjson.com/products/categories")
     .then((res) => res.json())
     .then((res) => {
@@ -22,10 +23,10 @@ function selectCategory() {
   if (text) {
     let container = document.querySelector(".grid-container");
     container.innerHTML = "";
-    loadCarts(0, `https://dummyjson.com/products/category/${text}`);
+    getProducts(0, `https://dummyjson.com/products/category/${text}`);
   }
 }
-function loadCarts(skipNumber = 0, apiUrl) {
+function getProducts(skipNumber = 0, apiUrl) {
   skipNumber = skipNumber * increment;
   increment += 1;
   let url;
@@ -79,7 +80,7 @@ function toggleViewMoreBtn(removeBtn = false) {
   } else {
     const button = document.createElement("button");
     button.innerText = "View More";
-    button.setAttribute("onclick", "loadCarts(12);");
+    button.setAttribute("onclick", "getProducts(12);");
     button.classList.add("view-more");
     document.body.appendChild(button);
   }
