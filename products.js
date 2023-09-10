@@ -34,7 +34,7 @@ function sortByPrice() {
     let container = document.querySelector(".grid-container");
     container.innerHTML = "";
     if (sortType) {
-      sortProducts(products, sortType);
+      sortProductsByPrice(products, sortType);
     }
     products.forEach((product) => {
       createCart(product);
@@ -131,7 +131,7 @@ function addToCart(e) {
   localStorage.setItem("allSelectedItems", JSON.stringify(allSelectedItems));
   e.target.classList.add("dimmed");
 }
-function sortProducts(products, sortType) {
+function sortProductsByPrice(products, sortType) {
   if (sortType == "Ascending") {
     products.sort((a, b) => {
       return a.price - b.price;
