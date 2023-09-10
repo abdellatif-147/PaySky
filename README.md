@@ -1,4 +1,9 @@
 I've divide everything into files to be more organized
+
+# how to run your solution :
+
+just open products.html file
+
 ### `JS file`
 
 i used Vanilla JS and DOM Manipulation to build this page without any framework as per your requirement
