@@ -1,5 +1,6 @@
 let increment = 0;
 let total = 0;
+let products = [];
 getCategories();
 getProducts();
 
@@ -19,30 +20,35 @@ function getCategories() {
 }
 function selectCategory() {
   let e = document.getElementById("categories");
-  var text = e.options[e.selectedIndex].text;
-  if (text) {
+  var category = e.options[e.selectedIndex].text;
+  if (category) {
     let container = document.querySelector(".grid-container");
     container.innerHTML = "";
-    getProducts(0, `https://dummyjson.com/products/category/${text}`);
+    getProducts(0, category);
   }
 }
 function sortByPrice() {
   let e = document.getElementById("sortProducts");
-  var text = e.options[e.selectedIndex].text;
-  if (text) {
+  var sortType = e.options[e.selectedIndex].text;
+  if (sortType && products) {
     let container = document.querySelector(".grid-container");
     container.innerHTML = "";
-    getProducts(0, "", text, 100);
+    if (sortType) {
+      sortProducts(products, sortType);
+    }
+    products.forEach((product) => {
+      createCart(product);
+    });
   }
 }
-function getProducts(skipNumber = 0, apiUrl, sortType, limit = 12) {
+function getProducts(skipNumber = 0, category) {
   skipNumber = skipNumber * increment;
   increment += 1;
   let url;
-  if (apiUrl) {
-    url = apiUrl;
+  if (category) {
+    url = `https://dummyjson.com/products/category/${category}`;
   } else {
-    url = `https://dummyjson.com/products?limit=${limit}`;
+    url = `https://dummyjson.com/products?limit=12`;
     url += `&skip=${skipNumber}`;
   }
   toggleLoader();
@@ -53,8 +59,10 @@ function getProducts(skipNumber = 0, apiUrl, sortType, limit = 12) {
   fetch(url)
     .then((res) => res.json())
     .then((response) => {
-      if (sortType) {
-        sortProducts(response.products, sortType);
+      if (category) {
+        products = response.products;
+      } else {
+        products.push(...response.products);
       }
       total = response.total;
       response.products.forEach((product) => {
@@ -62,13 +70,12 @@ function getProducts(skipNumber = 0, apiUrl, sortType, limit = 12) {
       });
       toggleViewMoreBtn(false);
       toggleLoader(true);
-      if (skipNumber == total - 4 || total <= 12 || sortType) {
+      if (skipNumber == total - 4 || total <= 12) {
         toggleViewMoreBtn(true);
       }
     })
     .catch((error) => {
       toggleLoader(true);
-      alert("there is an error when getting the data");
     });
 }
 
