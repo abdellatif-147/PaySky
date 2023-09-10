@@ -1,6 +1,6 @@
 I've divide everything into files to be more organized
 
-# how to run your solution :
+# how to run my solution :
 
 just open products.html file
 
