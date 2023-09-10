@@ -45,23 +45,16 @@ function getProducts(skipNumber = 0, apiUrl, sortType, limit = 12) {
     url = `https://dummyjson.com/products?limit=${limit}`;
     url += `&skip=${skipNumber}`;
   }
+  toggleLoader();
   let viewMore = document.querySelector(".view-more");
   if (viewMore) {
     toggleViewMoreBtn(true);
-    toggleLoader();
   }
   fetch(url)
     .then((res) => res.json())
     .then((response) => {
-      console.log(sortType, "sortTypesortType");
-      if (sortType == "Ascending") {
-        response.products.sort((a, b) => {
-          return a.price - b.price;
-        });
-      } else if (sortType == "Descending") {
-        response.products.sort((a, b) => {
-          return b.price - a.price;
-        });
+      if (sortType) {
+        sortProducts(response.products, sortType);
       }
       total = response.total;
       response.products.forEach((product) => {
@@ -75,6 +68,7 @@ function getProducts(skipNumber = 0, apiUrl, sortType, limit = 12) {
     })
     .catch((error) => {
       toggleLoader(true);
+      alert("there is an error when getting the data");
     });
 }
 
@@ -129,4 +123,15 @@ function addToCart(e) {
   allSelectedItems[selectedItem.id] = selectedItem;
   localStorage.setItem("allSelectedItems", JSON.stringify(allSelectedItems));
   e.target.classList.add("dimmed");
+}
+function sortProducts(products, sortType) {
+  if (sortType == "Ascending") {
+    products.sort((a, b) => {
+      return a.price - b.price;
+    });
+  } else if (sortType == "Descending") {
+    products.sort((a, b) => {
+      return b.price - a.price;
+    });
+  }
 }

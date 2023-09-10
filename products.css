@@ -1,59 +1,67 @@
+body {
+  font-family: "Roboto";
+  margin: 0;
+  .view-more {
+    display: block;
+    margin: 10px auto 0;
+    color: #f36a10;
+    background: transparent;
+    padding: 8px 20px;
+    border-color: #f36a10;
+    border-radius: 4em;
+    margin: 0 auto 80px;
+    cursor: pointer;
+  }
+  .loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #fff;
+    border-bottom-color: #ff3d00;
+    border-radius: 50%;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    display: flex;
+    margin: 80px auto;
+  }
+}
 .grid-container {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 10px;
   font-size: 10px;
   margin-bottom: 80px;
-}
-.grid-item {
-  text-align: center;
-  padding: 20px;
-}
-.image {
-  height: 150px;
-  max-width: 300px;
-  border-radius: 5px;
-}
-.view-more {
-  display: block;
-  margin: 10px auto 0;
-  color: #f36a10;
-  background: transparent;
-  padding: 8px 20px;
-  border-color: #f36a10;
-  border-radius: 4em;
-  margin: 0 auto 80px;
-  cursor: pointer;
-}
-.title {
-  width: 100px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin: 15px auto;
-}
-.add-to-card {
-  display: block;
-  margin: 10px auto 0;
-  background: linear-gradient(135deg, #1e4d97, #2a59a3);
-  color: white;
-  border-radius: 4em;
-  padding: 8px 20px;
-  margin-top: 30px;
-  cursor: pointer;
-}
-.loader {
-  width: 48px;
-  height: 48px;
-  border: 5px solid #fff;
-  border-bottom-color: #ff3d00;
-  border-radius: 50%;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
-  display: flex;
-  margin: 80px auto;
-}
 
+  .grid-item {
+    text-align: center;
+    padding: 20px;
+  }
+  .image {
+    height: 150px;
+    max-width: 300px;
+    border-radius: 5px;
+  }
+  .title {
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 15px auto;
+  }
+  .add-to-card {
+    display: block;
+    margin: 10px auto 0;
+    background: linear-gradient(135deg, #1e4d97, #2a59a3);
+    color: white;
+    border-radius: 4em;
+    padding: 8px 20px;
+    margin-top: 30px;
+    cursor: pointer;
+  }
+  .dimmed {
+    background: gray;
+    pointer-events: none;
+  }
+}
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
@@ -62,55 +70,45 @@
     transform: rotate(360deg);
   }
 }
-.dimmed {
-  background: gray;
-  pointer-events: none;
-}
+
 .header {
   display: flex;
   justify-content: center;
   padding: 30px 0;
   margin-bottom: 30px;
   background-color: darkgray;
-}
-.category-label {
-  margin-right: 10px;
-  font-size: 10px;
-}
-.category-select {
-  font-size: 10px;
-  margin-right: 50px;
-  height: 30px;
-  border-radius: 5px;
-}
-.sort-select {
-  font-size: 10px;
-  height: 30px;
-  border-radius: 5px;
+  .category-select {
+    font-size: 10px;
+    margin-right: 50px;
+    height: 30px;
+    border-radius: 5px;
+  }
+  .sort-select {
+    font-size: 10px;
+    height: 30px;
+    border-radius: 5px;
+  }
 }
 @media only screen and (min-width: 768px) {
   .grid-container {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     font-size: 15px;
-  }
-  .title {
-    width: 200px;
+    .title {
+      width: 200px;
+    }
+    .image {
+      height: 200px;
+      max-width: 330px;
+      border-radius: 8px;
+    }
   }
   .header {
-    .category-label {
-      font-size: 12px;
-    }
     .category-select,
     .sort-select {
       font-size: 12px;
       border-radius: 5px;
     }
-  }
-  .image {
-    height: 200px;
-    max-width: 330px;
-    border-radius: 8px;
   }
 }
 @media only screen and (min-width: 992px) {
@@ -118,24 +116,21 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     font-size: 20px;
-  }
-  .title {
-    width: 300px;
+    .title {
+      width: 300px;
+    }
+    .image {
+      height: 250px;
+      max-width: 400px;
+      border-radius: 10px;
+    }
   }
   .header {
-    .category-label {
-      font-size: 15px;
-    }
     .category-select,
     .sort-select {
       font-size: 15px;
       border-radius: 5px;
     }
-  }
-  .image {
-    height: 250px;
-    max-width: 400px;
-    border-radius: 10px;
   }
 }
 @font-face {
@@ -145,7 +140,4 @@
   font-display: swap;
   src: url("./Roboto-Regular.ttf") format("truetype");
 }
-body {
-  font-family: "Roboto";
-  margin: 0;
-}
+
