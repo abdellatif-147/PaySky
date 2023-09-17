@@ -85,8 +85,10 @@ function createCart(product) {
   div.innerHTML = `
   <img class='image' src='${product.thumbnail}'>
   <h3 class='title'>${product.title}</h3>
+  <div class="price-flag">
   <span class='price'>${product.price}</span>
   <span class='currency'>EGP</span>
+  </div>
   <button class='add-to-card' data-id='${product.id}' data-title='${product.title}' data-image='${product.thumbnail}' data-price='${product.price}' onclick='addToCart(event)'>Add to Cart</button>
   `;
   let container = document.querySelector(".grid-container");

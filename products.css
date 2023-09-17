@@ -30,10 +30,16 @@ body {
   gap: 10px;
   font-size: 10px;
   margin-bottom: 80px;
-
+  padding: 0 10px;
+  @media only screen and (min-width: 768px) {
+  padding: 0 30px;
+  }
   .grid-item {
     text-align: center;
     padding: 20px;
+    border: 1px solid #f36a10;
+    border-radius:10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
   .image {
     height: 200px;
@@ -60,6 +66,13 @@ body {
   .dimmed {
     background: gray;
     pointer-events: none;
+  }
+  .price-flag{
+    border: 1px solid #f36a10;
+    width: 100px;
+    margin: auto;
+    border-radius: 5px;
+    padding: 5px;
   }
 }
 @keyframes rotation {
@@ -141,3 +154,8 @@ body {
   src: url("./Roboto-Regular.ttf") format("truetype");
 }
 
+@mixin truncate-string() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
