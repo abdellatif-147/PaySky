@@ -73,6 +73,9 @@ body {
     margin: auto;
     border-radius: 5px;
     padding: 5px;
+    .currency{
+      color: #f36a10;
+    }
   }
 }
 @keyframes rotation {
